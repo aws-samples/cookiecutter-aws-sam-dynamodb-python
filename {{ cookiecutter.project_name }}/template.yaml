@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+    {{ cookiecutter.project_name }}
+
+    Sample SAM Template for {{ cookiecutter.project_name }} to interact with DynamoDB Events.
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+    Function:
+        Timeout: 5
+
+Resources:
+
+    ReadDynamoDBEvent:
+        Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+        Properties:
+            CodeUri: read_dynamodb_event/
+            Handler: app.lambda_handler
+            {%- if cookiecutter.runtime == 'python3.6' %}
+            Runtime: python3.6
+            {%- else %}
+            Runtime: python2.7
+            {%- endif %}
+            Events:
+                DynamoDBEvent:
+                    Type: DynamoDB # More info about DynamoDB Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#dynamodb
+                    Properties:
+                        Stream:
+                            !GetAtt DynamoDBTable.StreamArn
+                        StartingPosition: TRIM_HORIZON
+                        BatchSize: 10
+
+    DynamoDBTable:
+        Type: 'AWS::DynamoDB::Table'
+        Properties:
+            StreamSpecification:
+                StreamViewType: NEW_AND_OLD_IMAGES
+            ProvisionedThroughput:
+                WriteCapacityUnits: 5
+                ReadCapacityUnits: 5
+            AttributeDefinitions:
+                - AttributeName: id
+                  AttributeType: S
+            KeySchema:
+                - KeyType: HASH
+                  AttributeName: id

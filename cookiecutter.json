@@ -1,0 +1,4 @@
+{
+    "project_name": "dynamodb_event_reader",
+    "runtime": "python3.6"
+}
