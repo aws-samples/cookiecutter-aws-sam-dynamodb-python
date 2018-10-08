@@ -13,25 +13,6 @@ Sample SAM Template for {{ cookiecutter.project_name }} to interact with DynamoD
 * [Docker installed](https://www.docker.com/community-edition)
 * [SAM Local installed](https://github.com/awslabs/aws-sam-local)
 
-## Packaging
-
-AWS Lambda Python runtime requires a flat folder with all dependencies including the application. To facilitate this process, the pre-made SAM template expects this structure to be under `read_dynamodb_event/build/`:
-
-```yaml
-...
-    FirstFunction:
-        Type: AWS::Serverless::Function
-        Properties:
-            CodeUri: read_dynamodb_event/
-            ...
-```
-
-With that in mind, we will:
-
-1. Generate a hashed `requirements.txt` out of our `Pipfile` dep file
-1. Install all dependencies directly to `build` sub-folder
-2. Copy our function (app.py) into `build` sub-folder
-
 ### Local development
 
 Given that you followed Packaging instructions then run the following to invoke your function locally:
