@@ -13,9 +13,19 @@ Sample SAM Template for {{ cookiecutter.project_name }} to interact with DynamoD
 * [Docker installed](https://www.docker.com/community-edition)
 * [SAM Local installed](https://github.com/awslabs/aws-sam-local)
 
+
+### Build Your Application
+
+When you make a change to the code, you can run the following command to install dependencies
+and convert your Lambda function source code into an artifact that can be deployed and run on Lambda.
+
+```bash
+sam build
+```
+
 ### Local development
 
-Given that you followed Packaging instructions then run the following to invoke your function locally:
+Assuming you have already built your application, run the following to invoke your function locally:
 
 **Invoking function locally without API Gateway**
 
@@ -37,11 +47,16 @@ First and foremost, we need a S3 bucket where we can upload our Lambda functions
 aws s3 mb s3://BUCKET_NAME
 ```
 
+Now build your Lambda function
+
+```bash
+sam build
+```
+
 Provided you have a S3 bucket created, run the following command to package our Lambda function to S3:
 
 ```bash
 sam package \
-    --template-file template.yaml \
     --output-template-file packaged.yaml \
     --s3-bucket REPLACE_THIS_WITH_YOUR_S3_BUCKET_NAME
 ```
