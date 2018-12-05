@@ -17,10 +17,12 @@ Resources:
         Properties:
             CodeUri: read_dynamodb_event/
             Handler: app.lambda_handler
-            {%- if cookiecutter.runtime == 'python3.6' %}
+            {%- if cookiecutter.runtime == 'python2.7' %}
+            Runtime: python2.7
+            {%- elif cookiecutter.runtime == 'python3.6' %}
             Runtime: python3.6
             {%- else %}
-            Runtime: python2.7
+            Runtime: python3.7
             {%- endif %}
             Events:
                 DynamoDBEvent:

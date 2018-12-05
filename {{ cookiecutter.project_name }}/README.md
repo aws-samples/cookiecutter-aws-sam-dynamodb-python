@@ -5,10 +5,10 @@ Sample SAM Template for {{ cookiecutter.project_name }} to interact with DynamoD
 ## Requirements
 
 * AWS CLI already configured with at least PowerUser permission
-{% if cookiecutter.runtime == "python3.6" %}
-* [Python 3 installed](https://www.python.org/downloads/)
-{% else %}
+{% if cookiecutter.runtime == "python2.7" %}
 * [Python 2 installed](https://www.python.org/downloads/)
+{% else %}
+* [Python 3 installed](https://www.python.org/downloads/)
 {% endif %}
 * [Docker installed](https://www.docker.com/community-edition)
 * [SAM Local installed](https://github.com/awslabs/aws-sam-local)
