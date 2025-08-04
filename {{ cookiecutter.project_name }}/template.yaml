@@ -22,7 +22,7 @@ Resources:
             {%- elif cookiecutter.runtime == 'python3.6' %}
             Runtime: python3.6
             {%- else %}
-            Runtime: python3.7
+            Runtime: python3.13
             {%- endif %}
             Events:
                 DynamoDBEvent:
