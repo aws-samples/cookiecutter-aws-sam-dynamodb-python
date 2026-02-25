@@ -17,13 +17,7 @@ Resources:
         Properties:
             CodeUri: read_dynamodb_event/
             Handler: app.lambda_handler
-            {%- if cookiecutter.runtime == 'python2.7' %}
-            Runtime: python2.7
-            {%- elif cookiecutter.runtime == 'python3.6' %}
-            Runtime: python3.6
-            {%- else %}
-            Runtime: python3.7
-            {%- endif %}
+            Runtime: {{ cookiecutter.runtime }}
             Events:
                 DynamoDBEvent:
                     Type: DynamoDB # More info about DynamoDB Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#dynamodb

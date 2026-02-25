@@ -1,4 +1,4 @@
 {
     "project_name": "dynamodb_event_reader",
-    "runtime": "python3.7"
+    "runtime": "python3.14"
 }
